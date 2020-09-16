@@ -12,8 +12,6 @@
 - Run the following "docker run --name=mongo --rm --network=knote mongo"
 - Now lets run our application and load up the environmental variable for the New Relic license key.  Make sure to replace the indicated portion with your license key: docker run  -e NEW_RELIC_LICENSE_KEY=REPLACEWITHYOURKEY --name=knote --rm --network=knote -p 3000:3000 -e MONGO_URL=mongodb://mongo:27017/dev knote
 - You should see the new app by opening your browser and going to http://localhost:3000
-- Need to publish container on the Docker repo
-- Run the container in Kubernetes
 
 # Option 2 - Skip a step and quickly get the app up and running on Kuberenetes
 
