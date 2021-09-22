@@ -27,14 +27,24 @@
 
 # Option 3 Docker w/No APM on Ubuntu 18.4
 
--  sudo apt-get update 
+#install docker https://docs.docker.com/engine/install/linux-postinstall/
+- sudo apt-get update 
 - sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
     gnupg \
     lsb-release
-
+-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+- echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# install docker
+  sudo apt-get install docker-ce docker-ce-cli containerd.io
+# test docker  
+docker run hello-world
+# clone this repo https://github.com/rostirosti/knote_k8
+git clone https://github.com/rostirosti/knote_k8
 
 - Make sure you have docker on your machine
 - Go to app root directory.  Edit newrelic.js to your liking.  Leave the license key blank (we will send that part through an environmental variable)
