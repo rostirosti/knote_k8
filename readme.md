@@ -4,6 +4,7 @@
 
 # Option 1 test on local
 
+
 - Make sure you have docker on your machine
 - Go to app root directory.  Edit newrelic.js to your liking.  Leave the license key blank (we will send that part through an environmental variable)
 - Package it up as a docker image.  Execute the following "dockebuild -t knote ." 
@@ -24,4 +25,23 @@
 - Run "kubectl get pods --all-namespaces" to verify that all your pods are up
 - Check the IP of the load balancer by running "kubectl get services" 
 
+# Option 3 Docker w/No APM on Ubuntu 18.4
+
+-  sudo apt-get update 
+- sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+
+- Make sure you have docker on your machine
+- Go to app root directory.  Edit newrelic.js to your liking.  Leave the license key blank (we will send that part through an environmental variable)
+- Package it up as a docker image.  Execute the following "dockebuild -t knote ." 
+- Create a Docker network so that Node and MongoDB can communicate with each other "docker network create knote"
+- Now lets run the application.  For this to work we need to first fire up the Mongo DB container and then the Node container.
+- Run the following "docker run --name=mongo --rm --network=knote mongo"
+- Now lets run our application and load up the environmental variable for the New Relic license key.  Make sure to replace the indicated portion with your license key: docker run  -e NEW_RELIC_LICENSE_KEY=REPLACEWITHYOURKEY --name=knote --rm --network=knote -p 3000:3000 -e MONGO_URL=mongodb://mongo:27017/dev knote
+- You should see the new app by opening your browser and going to http://localhost:3000
 
