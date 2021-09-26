@@ -62,7 +62,8 @@ async function start() {
 }
 
 async function saveNote(db, note) {
-  await db.insertOne(note)
+  await db.insertOne(note),
+  console.log(note)
 }
 
 async function retrieveNotes(db) {
